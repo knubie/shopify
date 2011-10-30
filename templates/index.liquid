@@ -1,0 +1,88 @@
+<div class='products-section'>
+  <div class='carousel'>
+    <img src="{{ 'carousel1.png' | asset_url }}" alt="" />
+		<img src="{{ 'carousel2.png' | asset_url }}" alt="" />
+  </div>
+  <div class='featured'>
+		{% if settings.home_collections_featured %}
+			featured collections
+		{% else %}
+			featured products
+		{% endif %}
+  </div>
+  <div class='featured-divider'></div>
+  <div class='featured-row'>
+		{% if settings.home_collections_featured %}
+			{% if linklists[settings.home_collections_featured_linklist].links.size > 0 %}
+				<table>
+				{% tablerow link in linklists[settings.home_collections_featured_linklist].links cols: 3 %}
+    			{% if tablerowloop.col_last %}
+						<div class='product last'>
+					{% else %}
+    				<div class='product'>
+					{% endif %}
+						{% if link.compare_at_price_max > link.price %}
+    			  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+						{% endif %}
+    			  <a href="{{ link.url }}">
+							<img src="{{ link.object.products.first.images.first | product_img_url: 'original' }}" alt="{{ link.title | escape }}" class='product-img' />
+						</a>
+						<table>
+    			    <tr>
+    			      <td>
+    			        <div class='price'>
+    			          {{ link.price | money | remove: '.00' }}
+    			        </div>
+    			      </td>
+    			      <td>
+    			        <div class='desc'>
+    			          <a href="{{ link.url }}">{{ link.title }}</a>
+    			        </div>
+    			      </td>
+    			    </tr>
+    			  </table>
+    			</div>
+				{% endtablerow %}
+				</table>
+			{% else %}
+				Go to the Home Page section in your theme settings to select a link list to feature collections here. That link list must be populated with links to collections. Don't have such a link list? Create one under the Navigation tab in your shop admin.
+			{% endif %}
+		{% else %}
+			{% if collections.frontpage.handle == "frontpage" %}
+				<table>
+				{% tablerow product in collections.frontpage.products cols: 3 %}
+					{% if tablerowloop.col_last %}
+						<div class='product last'>
+					{% else %}
+    				<div class='product'>
+					{% endif %}
+						{% if product.compare_at_price_max > product.price %}
+    			  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+						{% endif %}
+						{% if product.available %}
+						{% else %}
+    			  	<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+						{% endif %}
+    			  <a href="{{ product.url | within: collections.frontpage }}">
+							<img src="{{ product.images.first | product_img_url: 'original' }}" alt="{{ product.title | escape }}" class='product-img' />
+						</a>
+    			  <table>
+    			    <tr>
+    			      <td>
+    			        <div class='price'>
+    			          {{ product.price | money | remove: '.00' }}
+    			        </div>
+    			      </td>
+    			      <td>
+    			        <div class='desc'>
+    			          <a href="{{ product.url | within: collections.frontpage }}">{{ product.title }}</a>
+    			        </div>
+    			      </td>
+    			    </tr>
+    			  </table>
+    			</div>
+				{% endtablerow %}
+			{% else %}
+				You need to create a collection with the handle "frontpage"
+			{% endif %}
+		{% endif %}

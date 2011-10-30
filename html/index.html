@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+      <title>The Dieter Store</title>
+      <link href='css/fonts.css' rel='stylesheet' />
+      <link href='css/styles.css' rel='stylesheet' />
+      <link href='css/reset.css' rel='stylesheet' />
+      <link href='css/nivo-slider.css' rel='stylesheet' />
+      <!-- %link{:href => "css/formalize.css", :rel => "stylesheet"} -->
+      <script src='js/jquery-1.6.4.min.js'></script>
+      <script src='js/jquery.nivo.slider.pack.js'></script>
+      <script src='js/main.js'></script>
+      <!-- %script{:src => "js/jquery.formalize.js"} -->
+    </meta>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='logo'>
+        The Dieter Store.
+      </div>
+      <div class='shopping-cart'>
+        <div class='cart-items'>0 items</div>
+        <div class='cart-total'>$0.00</div>
+        <div class='cart-img'>
+          <img alt='' src='img/cart.png' />
+        </div>
+      </div>
+      <div class='blank'></div>
+      <div class='search'>
+        <form class='search-form'>
+          <input class='search-box' placeholder='what are you looking for?' type='search' />
+        </form>
+      </div>
+      <div class='divider'></div>
+      <div class='nav'>
+        <div class='nav-head'>pages</div>
+				{% for link in linklists.main-menu.links }
+					<div class="nav-item"><a href="{{ link.url }}">{{ link.title }}</a></div>
+				{% endfor }
+        <div class='nav-divider'></div>
+        <div class='nav-head'>categories</div>
+				{% for link in linklists.categories.links }
+					<div class="nav-item"><a href="{{ link.url }}">{{ link.title }}</a></div>
+				{% endfor }
+        <div class='nav-divider'></div>
+        <div class='nav-head'>tags</div>
+        <div class='nav-item'>some</div>
+        <div class='nav-item'>tags</div>
+        <div class='nav-item'>could</div>
+        <div class='nav-item'>go</div>
+        <div class='nav-item'>here</div>
+      </div>
+      <div class='products-section'>
+        <div class='carousel'>
+          <img alt='' src='img/carousel1.png' />
+          <img alt='' src='img/carousel2.png' />
+        </div>
+        <div class='featured'>
+          featured
+        </div>
+        <div class='featured-divider'></div>
+				<table><tr><td>
+          <div class='product'>
+            <img alt='' class='sale' src='img/sale.png' />
+            <img alt='' class='product-img' src='img/Braun-TP-1.jpg' />
+            <table>
+              <tr>
+                <td>
+                  <div class='price'>
+                    $300
+                  </div>
+                </td>
+                <td>
+                  <div class='desc'>
+                    TP 1 radio/phono
+                    combination
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+					</td><td>
+          <div class='product'>
+            <img alt='' class='soldout' src='img/soldout.png' />
+            <img alt='' class='product-img' src='img/Braun-Citromatic.jpg' />
+            <table>
+              <tr>
+                <td>
+                  <div class='price'>
+                    $30
+                  </div>
+                </td>
+                <td>
+                  <div class='desc'>
+                    MPZ 21 multipress citrus juicer
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+					</td><td>
+          <div class='product last'>
+            <img alt='' class='product-img' src='img/Braun-T-1000.jpg' />
+            <table>
+              <tr>
+                <td>
+                  <div class='price'>
+                    $200
+                  </div>
+                </td>
+                <td>
+                  <div class='desc'>
+                    T 1000 world receiver
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td></tr><tr><td>
+          <div class='product'>
+            <img alt='' class='product-img' src='img/Braun-RT-20.jpg' />
+            <table>
+              <tr>
+                <td>
+                  <div class='price'>
+                    $300
+                  </div>
+                </td>
+                <td>
+                  <div class='desc'>
+                    TP 1 radio/phono combination
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+					</td><td>
+          <div class='product'>
+            <img alt='' class='product-img' src='img/Braun-wall-mounted-radio.jpg' />
+            <table>
+              <tr>
+                <td>
+                  <div class='price'>
+                    $30
+                  </div>
+                </td>
+                <td>
+                  <div class='desc'>
+                    L 450 flat loudspeaker
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+					</td><td>
+          <div class='product last'>
+            <img alt='' class='product-img' src='img/Braun-T2-lighter.jpg' />
+            <table>
+              <tr>
+                <td>
+                  <div class='price'>
+                    $30
+                  </div>
+                </td>
+                <td>
+                  <div class='desc'>
+                    Cylindric T 2 lighter
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

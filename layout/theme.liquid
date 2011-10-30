@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{{ shop.name }} &mdash; {{ page_title }}</title>
+
+		{{ 'jquery-1.6.4.min.js' | asset_url | script_tag }}
+		{{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
+		{{ 'main.js' | asset_url | script_tag }}
+		{{ 'fonts.css'  | asset_url | stylesheet_tag }}
+		{{ 'styles.css'  | asset_url | stylesheet_tag }}
+		{{ 'reset.css'  | asset_url | stylesheet_tag }}
+		{{ 'nivo-slider.css'  | asset_url | stylesheet_tag }}
+		
+		{{ content_for_header }}
+
+	</head>
+	<body>
+	<div class='container'>
+		<div class='logo'>
+			{% if settings.use_logo_image == true %}
+				<a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
+			{% else %} 
+				<a href="/">{{ shop.name }}</a>
+			{% endif %}
+		</div>
+		<div class='shopping-cart'>
+      <div class='cart-items'>
+      	{% if cart.item_count > 0 %}
+	      	{{ cart.item_count}} {{ cart.item_count | pluralize: 'item', 'items' }}
+	    	{% else %}
+	      	0 items
+	    	{% endif %}
+      </div>
+      <div class='cart-total'>
+      	{{ cart.total_price | money }}
+      </div>
+      <div class='cart-img'>
+        <a href="/cart">{{ 'cart.png' | asset_url | img_tag:'shopping' }}</a>
+      </div>
+    </div>
+		<div class="blank">
+		</div>
+		<div class='search'>
+      <form class='search-form' action="/search" method="get">
+        <input class='search-box' placeholder='what are you looking for?' type='search' />
+      </form>
+    </div>
+		<div class='divider'></div>
+    <div class='nav'>
+      <div class='nav-head'>pages</div>
+      {% for link in linklists.main-menu.links %}
+				<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+			{% endfor %}
+      <div class='nav-divider'></div>
+      <div class='nav-head'>categories</div>
+			{% for link in linklists.categories.links %}
+				<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+			{% endfor %}
+      <div class='nav-divider'></div>
+      <div class='nav-head'>tags</div>
+      <div class='nav-item'>some</div>
+      <div class='nav-item'>tags</div>
+      <div class='nav-item'>could</div>
+      <div class='nav-item'>go</div>
+      <div class='nav-item'>here</div>
+    </div>
+		{{ content_for_layout }}
+	</div>
+	</body>
+</html>

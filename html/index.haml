@@ -1,0 +1,118 @@
+!!!
+%html{:lang => "en"}
+	%head
+		%meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+			%title The Dieter Store
+			%link{:href => "css/fonts.css", :rel => "stylesheet"}
+			%link{:href => "css/styles.css", :rel => "stylesheet"}
+			%link{:href => "css/reset.css", :rel => "stylesheet"}
+			%link{:href => "css/nivo-slider.css", :rel => "stylesheet"}
+			/ %link{:href => "css/formalize.css", :rel => "stylesheet"}
+			%script{:src => "js/jquery-1.6.4.min.js"}
+			%script{:src => "js/jquery.nivo.slider.pack.js"}
+			%script{:src => "js/main.js"}
+			/ %script{:src => "js/jquery.formalize.js"}
+	%body
+		.container
+			.logo
+				The Dieter Store.
+			.shopping-cart
+				.cart-items 0 items
+				.cart-total $0.00
+				.cart-img
+					%img{:alt => "", :src => "img/cart.png"}/
+			.blank
+			.search
+				%form{:class => "search-form"}
+					%input{:type => "search", :placeholder => "what are you looking for?", :class => "search-box"}
+			.divider
+			.nav
+				.nav-head pages
+				.nav-item home
+				.nav-item catalog
+				.nav-item about us
+				.nav-divider
+				.nav-head categories
+				.nav-item speakers
+				.nav-item furniture
+				.nav-item clocks
+				.nav-item juicer
+				.nav-divider
+				.nav-head tags
+				.nav-item some
+				.nav-item tags
+				.nav-item could
+				.nav-item go
+				.nav-item here
+			.products-section
+				.carousel
+					%img{:alt => "", :src => "img/carousel1.png"}/
+					%img{:alt => "", :src => "img/carousel2.png"}/
+				.featured
+					featured
+				.featured-divider
+				.featured-row
+					.product
+						%img{:alt => "", :src => "img/sale.png", :class => "sale"}/
+						%img{:alt => "", :src => "img/Braun-TP-1.jpg", :class => "product-img"}/
+						%table
+							%tr
+								%td
+									.price
+										$300
+								%td
+									.desc
+										TP 1 radio/phono
+										combination
+					.product
+						%img{:alt => "", :src => "img/soldout.png", :class => "soldout"}/
+						%img{:alt => "", :src => "img/Braun-Citromatic.jpg", :class => "product-img"}/
+						%table
+							%tr
+								%td
+									.price
+										$30
+								%td
+									.desc
+										MPZ 21 multipress citrus juicer
+					.product.last
+						%img{:alt => "", :src => "img/Braun-T-1000.jpg", :class => "product-img"}/
+						%table
+							%tr
+								%td
+									.price
+										$200
+								%td
+									.desc
+										T 1000 world receiver
+				.featured-row
+					.product
+						%img{:alt => "", :src => "img/Braun-RT-20.jpg", :class => "product-img"}/
+						%table
+							%tr
+								%td
+									.price
+										$300
+								%td
+									.desc
+										TP 1 radio/phono combination
+					.product
+						%img{:alt => "", :src => "img/Braun-wall-mounted-radio.jpg", :class => "product-img"}/
+						%table
+							%tr
+								%td
+									.price
+										$30
+								%td
+									.desc
+										L 450 flat loudspeaker
+					.product.last
+						%img{:alt => "", :src => "img/Braun-T2-lighter.jpg", :class => "product-img"}/
+						%table
+							%tr
+								%td
+									.price
+										$30
+								%td
+									.desc
+										Cylindric T 2 lighter
