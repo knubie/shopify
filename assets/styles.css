@@ -115,10 +115,6 @@ input:-moz-placeholder {
 	vertical-align: top;
 }
 
-.last {
-	margin-right: 0;
-}
-
 .product-img {
 	width: 243px;
 	display: block;
@@ -183,6 +179,15 @@ input:-moz-placeholder {
 	padding: 1px 0 1px 5px;
 }
 
+.nav-item-active {
+	font-family: ProximaNovaRegular;
+	font-size: 18px;
+	color: #ed5241;
+	background-color:	#fff;
+	padding-left: 5px;
+	padding: 1px 0 1px 5px;
+}
+
 .nav-item:hover {
 	background-color:	#eeeeee;	
 }
@@ -231,4 +236,75 @@ input:-moz-placeholder {
 
 .nivo-controlNav a.active {
     background-position:0 -12px;
+}
+
+/* start product desc */
+
+.pd-imgs {
+	display: inline-block;
+	margin-right: 40px;
+	vertical-align: top;
+}
+
+.pd-name {
+	font-family: ProximaNovaRegular;
+	font-size: 24px;
+	color: #7f7e83;
+	margin-bottom: 30px;
+}
+
+.pd-desc {
+	font-family: ProximaNovaRegular;
+	font-size: 14px;
+	line-height: 20px;
+	color: #7f7e83;
+}
+
+.pd-price {
+	font-family: ProximaNovaRegular;
+	font-size: 18px;
+	color:#a6aaad;
+	float: left;
+}
+
+.pd-text {
+	width: 308px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.pd-text a {
+	text-decoration: underline;
+	text-transform: uppercase;
+	color: #ed5241;
+	font-family: ProximaNovaBold;
+	font-size: 12px;
+	float: right;
+}
+
+.thumb {
+	display: inline-block;
+	width: 89px;
+	margin-top: 8px;
+	margin-right: 8px;
+}
+
+.last {
+	margin-right: 0;
+}
+
+.pd-text select {
+	width: 160px;
+	margin-bottom: 30px;
+	clear: both;
+}
+
+/* this should probably always be last */
+
+.hidden {
+	display: none;
+}
+
+.last {
+	margin-right: 0;
 }

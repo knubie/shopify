@@ -7,6 +7,7 @@
 		{{ 'jquery-1.6.4.min.js' | asset_url | script_tag }}
 		{{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
 		{{ 'main.js' | asset_url | script_tag }}
+		{{ 'option_selection.js' | asset_url | script_tag }}
 		{{ 'fonts.css'  | asset_url | stylesheet_tag }}
 		{{ 'styles.css'  | asset_url | stylesheet_tag }}
 		{{ 'reset.css'  | asset_url | stylesheet_tag }}
@@ -24,6 +25,7 @@
 				<a href="/">{{ shop.name }}</a>
 			{% endif %}
 		</div>
+		<a href="/cart">
 		<div class='shopping-cart'>
       <div class='cart-items'>
       	{% if cart.item_count > 0 %}
@@ -36,9 +38,10 @@
       	{{ cart.total_price | money }}
       </div>
       <div class='cart-img'>
-        <a href="/cart">{{ 'cart.png' | asset_url | img_tag:'shopping' }}</a>
+        {{ 'cart.png' | asset_url | img_tag:'shopping' }}
       </div>
     </div>
+		</a>
 		<div class="blank">
 		</div>
 		<div class='search'>
@@ -50,12 +53,20 @@
     <div class='nav'>
       <div class='nav-head'>pages</div>
       {% for link in linklists.main-menu.links %}
-				<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+				{% if link.active %}
+					<div class="nav-item-active">{{ link.title | downcase }}</div>
+				{% else %}
+					<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+				{% endif %}
 			{% endfor %}
       <div class='nav-divider'></div>
       <div class='nav-head'>categories</div>
 			{% for link in linklists.categories.links %}
-				<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+				{% if link.active %}
+					<div class="nav-item-active">{{ link.title | downcase }}</div>
+				{% else %}
+					<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+				{% endif %}
 			{% endfor %}
       <div class='nav-divider'></div>
       <div class='nav-head'>tags</div>

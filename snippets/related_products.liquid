@@ -1,0 +1,61 @@
+{% assign number_of_related_products_to_show = 3 %}
+{% assign image_size = 'original' %}
+{% assign heading = 'related products' %}
+
+{% capture number_of_related_products_to_fetch %}{{ number_of_related_products_to_show | plus: 1 }}{% endcapture %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+{% assign found_a_collection = false %}
+{% for c in product.collections %}
+  {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' %}
+    {% assign found_a_collection = true %}
+    {% assign collection = c %}
+  {% endif %}
+{% endfor %}
+{% endif %}
+
+{% if collection %}
+	<div class='featured'>
+		{{ heading }}
+	</div>
+	<div class='featured-divider'></div>
+	<div class='featured-row'>
+		{% assign current_product_found = false %}
+		{% assign index = 0 %}
+		{% for prod in collection.products limit: number_of_related_products_to_fetch %}
+			{% if prod.title == product.title %}
+		  	{% assign current_product_found = true %}
+			{% else %}
+				{% capture index %}{{ index | plus: 1 }}{% endcapture %}
+		  	{% unless current_product_found == false and forloop.last %}
+				{% if index == '3' %}
+					<div class='product last'>
+				{% else %}
+					<div class='product'>
+				{% endif %}
+				{% if prod.compare_at_price_max > prod.price %}
+				  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+				{% endif %}
+				<a href="{{ prod.url | within: collection }}">
+					<img src="{{ prod.featured_image | product_img_url: 'original' }}" alt="{{ link.title | escape }}" class='product-img' />
+				</a>
+				<table>
+					<tr>
+						<td>
+							<div class='price'>
+								{{ prod.price | money | remove: '.00' }}
+							</div>
+						</td>
+						<td>
+							<div class='desc'>
+								<a href="{{ prod.url }}">{{ prod.title }}{{ index }}</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+				{% endunless %}
+			</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endif %}

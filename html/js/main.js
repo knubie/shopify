@@ -26,4 +26,8 @@ $(window).load(function() {
 		        lastSlide: function(){}, // Triggers when last slide is shown
 		        afterLoad: function(){} // Triggers when slider has loaded
 		    });
+		
+		$('.thumb').click(function(){
+			$('#big-img').attr('src', $(this).attr('src'));
+		});
 });

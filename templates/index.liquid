@@ -61,7 +61,9 @@
 						{% endif %}
 						{% if product.available %}
 						{% else %}
-    			  	<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+							<a href="{{ product.url | within: collections.frontpage }}">
+    			  		<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+							</a>
 						{% endif %}
     			  <a href="{{ product.url | within: collections.frontpage }}">
 							<img src="{{ product.images.first | product_img_url: 'original' }}" alt="{{ product.title | escape }}" class='product-img' />
