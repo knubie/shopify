@@ -244,6 +244,13 @@ input:-moz-placeholder {
 	display: inline-block;
 	margin-right: 40px;
 	vertical-align: top;
+	position: relative;
+}
+
+.onsale {
+	position: absolute;
+	top: 0;
+	right: 4px;
 }
 
 .pd-name {
@@ -265,6 +272,11 @@ input:-moz-placeholder {
 	font-size: 18px;
 	color:#a6aaad;
 	float: left;
+}
+
+.old-price {
+	text-decoration: line-through;
+	color: #d0d6db;
 }
 
 .pd-text {
@@ -297,6 +309,14 @@ input:-moz-placeholder {
 	width: 160px;
 	margin-bottom: 30px;
 	clear: both;
+}
+
+.related {
+	margin-top: 100px;
+}
+
+.search-terms {
+	color: #4d4d4d;
 }
 
 /* this should probably always be last */

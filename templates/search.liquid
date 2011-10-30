@@ -1,34 +1,54 @@
-<div id="full-width">
-    
-  {% if search.performed %}
-	<h2>Searching for "{{search.terms | escape}}"</h2>
-    {% paginate search.results by 8 %}  
-    {% if search.results == empty %}  
-      <p class="alt">Your search for "{{search.terms | escape}}" did not yield any results</p>              
-    {% else %}  
-    	<table id="collection" cellpadding="0" cellspacing="0">
-      	{% tablerow item in search.results cols: 1 %}      
-      		<div class="product-image">
-      			<a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}"><img src="{{ item.images.first | product_img_url: 'small' }}" alt="{{ item.title | escape }}" /></a>
-      		</div>
-      		<div class="product-info">
-      			<p class="title"><a class="result-title" href="{{ item.url | within: collection }}">{{ item.title | truncate: 30 }}</a>
-      			<p>{{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}<br /><a class="search-result" href="{{ item.url | within: collection }}">View this Product</a></p>
-      		</div><div style="clear: both;"></div><div class="dotted-divider"></div>
-      	{% endtablerow %}<div class="dotted-divider"></div>
-    	</table>
-    {% endif %}
-    
-  	{% if paginate.pages > 1 %}
-    	<div class="pagination">
-    		{{ paginate | default_pagination }}
-    	</div>
-  	{% endif %}
-    
-    {% endpaginate %}    
-    
-  {% endif %}
-
-	<h2>Search</h2>
-
+<div class='products-section'>
+	{% if search.performed %}
+		{% paginate search.results by 21 %}
+	  <div class='featured'>
+			{% if search.results == empty %}
+				no results for <span class="search-terms">{{ search.terms | escape }}</span>
+			{% else %}
+				showing results for <span class="search-terms">{{ search.terms | escape }}</span>
+	  		</div>
+	  		<div class='featured-divider'></div>
+				<table>
+					{% tablerow item in search.results cols: 3 %}
+						{% if tablerowloop.col_last %}
+							<div class='product last'>
+						{% else %}
+							<div class='product'>
+						{% endif %}
+						{% if item.compare_at_price_max > item.price %}
+							<img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+						{% endif %}
+						{% if item.available %}
+						{% else %}
+							<a href="{{ item.url | within: collections.frontpage }}">
+								<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+							</a>
+						{% endif %}
+						<a href="{{ item.url | within: collections.frontpage }}">
+							<img src="{{ item.images.first | product_img_url: 'original' }}" alt="{{ item.title | escape }}" class='product-img' />
+						</a>
+						<table>
+						  <tr>
+						    <td>
+						      <div class='price'>
+						        {{ item.price | money | remove: '.00' }}
+						      </div>
+						    </td>
+						    <td>
+						      <div class='desc'>
+						        <a href="{{ item.url | within: collections.frontpage }}">{{ item.title }}</a>
+						      </div>
+						    </td>
+						  </tr>
+						</table>
+					{% endtablerow %}
+				</table>
+				{% if paginate.pages > 1 %}
+		    	<div class="pagination">
+		    		{{ paginate | default_pagination }}
+		    	</div>
+		  	{% endif %}
+			{% endif %}
+		{% endpaginate %}
+	{% endif %}
 </div>

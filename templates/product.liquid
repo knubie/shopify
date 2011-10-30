@@ -1,5 +1,8 @@
 <div class='products-section'>
 	<div class="pd-imgs">
+		{% if product.compare_at_price_max > product.price %}
+			<img alt='' class='onsale' src="{{ 'onsale.png' | asset_url }}" />
+		{% endif %}
 		<img src="{{ product.images.first | product_img_url: 'original' }}" id="big-img" alt=""/>
 		<br/>
 		{% for image in product.images %}
@@ -32,10 +35,14 @@
 					</div>
 				</form>
 			{% else %}
-				<form action="/cart/add" method="post">
+				<form action="/cart/add" method="post" name="varient_selector">
+					<input type="hidden" id="{{ variant.id }}" name="id" value="{{ product.variants[0].id }}" />
 					<div>
 						<div class="pd-price">
-							{{ product.price | money_with_currency | remove: '.00' }}
+							{% if product.compare_at_price_max > product.price %}
+								<span class="old-price">{{ product.compare_at_price_max | money | remove: '.00' }}</span>
+							{% endif %}
+							{{ product.price | money | remove: '.00' }}
 						</div>
 						<noscript>
 							<input type="submit" class="large button main" name="add" value="Add to Shopping Cart" id="purchase" />

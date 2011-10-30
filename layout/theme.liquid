@@ -46,7 +46,8 @@
 		</div>
 		<div class='search'>
       <form class='search-form' action="/search" method="get">
-        <input class='search-box' placeholder='what are you looking for?' type='search' />
+        <input class='search-box' name="q" id="q" placeholder='what are you looking for?' type='search' />
+				<input type="hidden" name="search-button" onclick="if( this.value == 'Search...' ) {this.value = '';};" id="seek" />
       </form>
     </div>
 		<div class='divider'></div>

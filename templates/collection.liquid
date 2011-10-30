@@ -13,6 +13,12 @@
 				{% if product.compare_at_price_max > product.price %}
 			  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
 				{% endif %}
+				{% if product.available %}
+				{% else %}
+					<a href="{{ product.url | within: collections.frontpage }}">
+			  		<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+					</a>
+				{% endif %}
 			  <a href="{{ product.url | within: collection }}">
 					<img src="{{ product.images.first | product_img_url: 'original' }}" alt="{{ product.title | escape }}" class='product-img' />
 				</a>

@@ -15,47 +15,51 @@
 {% endif %}
 
 {% if collection %}
-	<div class='featured'>
+	<div class='featured related'>
 		{{ heading }}
 	</div>
 	<div class='featured-divider'></div>
-	<div class='featured-row'>
-		{% assign current_product_found = false %}
-		{% assign index = 0 %}
-		{% for prod in collection.products limit: number_of_related_products_to_fetch %}
-			{% if prod.title == product.title %}
-		  	{% assign current_product_found = true %}
+	{% assign current_product_found = false %}
+	{% assign index = 0 %}
+	{% for prod in collection.products limit: number_of_related_products_to_fetch %}
+		{% if prod.title == product.title %}
+	  	{% assign current_product_found = true %}
+		{% else %}
+			{% capture index %}{{ index | plus: 1 }}{% endcapture %}
+	  	{% unless current_product_found == false and forloop.last %}
+			{% if index == '3' %}
+				<div class='product last'>
 			{% else %}
-				{% capture index %}{{ index | plus: 1 }}{% endcapture %}
-		  	{% unless current_product_found == false and forloop.last %}
-				{% if index == '3' %}
-					<div class='product last'>
-				{% else %}
-					<div class='product'>
-				{% endif %}
-				{% if prod.compare_at_price_max > prod.price %}
-				  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
-				{% endif %}
-				<a href="{{ prod.url | within: collection }}">
-					<img src="{{ prod.featured_image | product_img_url: 'original' }}" alt="{{ link.title | escape }}" class='product-img' />
-				</a>
-				<table>
-					<tr>
-						<td>
-							<div class='price'>
-								{{ prod.price | money | remove: '.00' }}
-							</div>
-						</td>
-						<td>
-							<div class='desc'>
-								<a href="{{ prod.url }}">{{ prod.title }}{{ index }}</a>
-							</div>
-						</td>
-					</tr>
-				</table>
-				{% endunless %}
-			</div>
+				<div class='product'>
 			{% endif %}
-		{% endfor %}
-	</div>
+			{% if prod.compare_at_price_max > prod.price %}
+			  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+			{% endif %}
+			{% if prod.available %}
+			{% else %}
+				<a href="{{ prod.url | within: collection }}">
+					<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+				</a>
+			{% endif %}
+			<a href="{{ prod.url | within: collection }}">
+				<img src="{{ prod.featured_image | product_img_url: 'original' }}" alt="{{ link.title | escape }}" class='product-img' />
+			</a>
+			<table>
+				<tr>
+					<td>
+						<div class='price'>
+							{{ prod.price | money | remove: '.00' }}
+						</div>
+					</td>
+					<td>
+						<div class='desc'>
+							<a href="{{ prod.url }}">{{ prod.title }}{{ index }}</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+			{% endunless %}
+		</div>
+		{% endif %}
+	{% endfor %}
 {% endif %}
