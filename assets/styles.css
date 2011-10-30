@@ -238,7 +238,7 @@ input:-moz-placeholder {
     background-position:0 -12px;
 }
 
-/* start product desc */
+/* start product page */
 
 .pd-imgs {
 	display: inline-block;
@@ -317,6 +317,99 @@ input:-moz-placeholder {
 
 .search-terms {
 	color: #4d4d4d;
+}
+
+.selector-wrapper label {
+	font-family: ProximaNovaRegular;
+	font-size: 14px;
+	display: block;
+	color: #A6AAAD;
+}
+
+/* cart */
+
+#cart-desc {
+	border: 0;
+	padding: 0;
+	width: 433px;
+}
+
+.cart-col {
+	vertical-align: middle;
+}
+
+.col-three {
+	width: 122px;
+	text-align: right;
+}
+
+.cart-thumb {
+	display: inline-block;
+	width: 89px;
+	margin-right: 26px;
+}
+
+#cart-price {
+	padding: 0;
+}
+
+.remove a {
+	font-family: ProximaNovaRegular;
+	font-size: 10px;
+	text-transform: uppercase;
+	color:#4d4d4d;
+}
+
+.total-price {
+	text-align: right;
+}
+
+.total {
+	font-family: ProximaNovaRegular;
+	font-size: 18px;
+	color:#a6aaad;
+}
+
+.big-price {
+	font-family: ProximaNovaRegular;
+	font-size: 24px;
+	color:#4d4d4d;
+}
+
+.adjust-qty {
+	width: 76px;
+}
+
+.update-cart, .checkout {
+	display: inline-block;
+	margin-left: 30px;
+	font-family: ProximaNovaBold;
+	font-size: 12px;
+}
+
+.update-cart a, .update-cart a:hover, .update-cart a:visited {
+	color: #a6aaad;
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.checkout a, .checkout a:hover, .checkout a:visited {
+	color: #ed5241;
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.adjust-qty img {
+	display: inline-block;
+}
+
+.adjust-qty input {
+	width: 30px;
+	margin-left: 10px;
+}
+
+#update-button, #checkout-button {
+	display: none;
 }
 
 /* this should probably always be last */

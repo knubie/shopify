@@ -30,4 +30,12 @@ $(window).load(function() {
 	$('.thumb').click(function(){
 		$('#big-img').attr('src', $(this).attr('src'));
 	});
+	
+	$('#update-link').click(function(){
+		$('#update-button').click();
+	});
+	$('#checkout-link').click(function(){
+		$('#checkout-button').click();
+	});
+	
 });
