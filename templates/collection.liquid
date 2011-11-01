@@ -5,38 +5,7 @@
 	{% else %}		
 		<table>
 		{% tablerow product in collection.products cols: 3 %}
-			{% if tablerowloop.col_last %}
-				<div class='product last'>
-			{% else %}
-				<div class='product'>
-			{% endif %}
-				{% if product.compare_at_price_max > product.price %}
-			  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
-				{% endif %}
-				{% if product.available %}
-				{% else %}
-					<a href="{{ product.url | within: collections.frontpage }}">
-			  		<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
-					</a>
-				{% endif %}
-			  <a href="{{ product.url | within: collection }}">
-					<img src="{{ product.images.first | product_img_url: 'original' }}" alt="{{ product.title | escape }}" class='product-img' />
-				</a>
-				<table>
-			    <tr>
-			      <td>
-			        <div class='price'>
-			          {{ product.price | money | remove: '.00' }}
-			        </div>
-			      </td>
-			      <td>
-			        <div class='desc'>
-			          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-			        </div>
-			      </td>
-			    </tr>
-			  </table>
-			</div>
+			{% include 'product_loop' %}
 		{% endtablerow %}
 		<table>
 		{% if paginate.pages > 1 %}

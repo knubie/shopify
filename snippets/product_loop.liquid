@@ -1,0 +1,47 @@
+{% if tablerowloop.col_last %}<div class='product last'>{% else %}<div class='product'>{% endif %}
+	{% if settings.sale_banner %}
+		{% if product.compare_at_price_max > product.price %}
+		  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+		{% endif %}
+	{% endif %}
+	{% if product.available %}
+	{% else %}
+		{% if settings.soldout_banner %}
+			<a href="{{ product.url }}">
+	  		<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+			</a>
+		{% endif %}
+	{% endif %}
+	<a href="{{ product.url }}">
+		<img src="{{ product.images.first | product_img_url: 'original' }}" alt="{{ product.title | escape }}" class='product-img' />
+	</a>
+	<table>
+	  <tr>
+	    <td>
+	      <div class='price'>
+					{% if settings.price_comparison == true %}
+						{% if product.compare_at_price_max > product.price %}
+							<span class="old-price">
+								{% if settings.price_decimal %}
+									{{ product.compare_at_price_max | money }}<br/>
+								{% else %}
+				        	{{ product.compare_at_price_max | money | remove: '.00' }}<br/>
+								{% endif %}
+							</span>
+						{% endif %}
+					{% endif %}
+					{% if settings.price_decimal %}
+						{{ product.price | money }}
+					{% else %}
+	        	{{ product.price | money | remove: '.00' }}
+					{% endif %}
+	      </div>
+	    </td>
+			<td>
+				<div class='desc'>
+					<a href="{{ product.url }}">{{ product.title }}</a>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

@@ -1,7 +1,9 @@
 <div class='products-section'>
 	<div class="pd-imgs">
-		{% if product.compare_at_price_max > product.price %}
-			<img alt='' class='onsale' src="{{ 'onsale.png' | asset_url }}" />
+		{% if settings.sale_banner %}
+			{% if product.compare_at_price_max > product.price %}
+				<img alt='' class='onsale' src="{{ 'onsale.png' | asset_url }}" />
+			{% endif %}
 		{% endif %}
 		<img src="{{ product.images.first | product_img_url: 'original' }}" id="big-img" alt=""/>
 		<br/>
@@ -39,10 +41,22 @@
 					<input type="hidden" id="{{ variant.id }}" name="id" value="{{ product.variants[0].id }}" />
 					<div>
 						<div class="pd-price">
-							{% if product.compare_at_price_max > product.price %}
-								<span class="old-price">{{ product.compare_at_price_max | money | remove: '.00' }}</span>
+							{% if settings.price_comparison == true %}
+								{% if product.compare_at_price_max > product.price %}
+									<span class="old-price">
+										{% if settings.price_decimal %}
+											{{ product.compare_at_price_max | money }}
+										{% else %}
+						        	{{ product.compare_at_price_max | money | remove: '.00' }}
+										{% endif %}
+									</span>
+								{% endif %}
 							{% endif %}
-							{{ product.price | money | remove: '.00' }}
+							{% if settings.price_decimal %}
+								{{ product.price | money }}
+							{% else %}
+			        	{{ product.price | money | remove: '.00' }}
+							{% endif %}
 						</div>
 						<noscript>
 							<input type="submit" class="large button main" name="add" value="Add to Shopping Cart" id="purchase" />
@@ -63,7 +77,9 @@
 			{{ product.description }}
 		</div>
 	</div>
+	{% if settings.related_products %}
 	{% include 'related_products' %}
+	{% endif %}
 </div>
 
 <script type="text/javascript">

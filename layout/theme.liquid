@@ -18,6 +18,7 @@
 	</head>
 	<body>
 	<div class='container'>
+		{% if settings.fixed_header %}<div class="fixed">{% endif %}
 		<div class='logo'>
 			{% if settings.use_logo_image == true %}
 				<a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
@@ -25,32 +26,36 @@
 				<a href="/">{{ shop.name }}</a>
 			{% endif %}
 		</div>
-		<a href="/cart">
-		<div class='shopping-cart'>
-      <div class='cart-items'>
-      	{% if cart.item_count > 0 %}
-	      	{{ cart.item_count}} {{ cart.item_count | pluralize: 'item', 'items' }}
-	    	{% else %}
-	      	0 items
-	    	{% endif %}
-      </div>
-      <div class='cart-total'>
-      	{{ cart.total_price | money }}
-      </div>
-      <div class='cart-img'>
-        {{ 'cart.png' | asset_url | img_tag:'shopping' }}
-      </div>
-    </div>
-		</a>
 		<div class="blank">
 		</div>
+		<table><tr><td>
 		<div class='search'>
       <form class='search-form' action="/search" method="get">
         <input class='search-box' name="q" id="q" placeholder='what are you looking for?' type='search' />
 				<input type="hidden" name="search-button" onclick="if( this.value == 'Search...' ) {this.value = '';};" id="seek" />
       </form>
     </div>
+		</td><td>
+			<a href="/cart">
+			<div class='shopping-cart'>
+	      <div class='cart-items'>
+	      	{% if cart.item_count > 0 %}
+		      	{{ cart.item_count}} {{ cart.item_count | pluralize: 'item', 'items' }}
+		    	{% else %}
+		      	0 items
+		    	{% endif %}
+	      </div>
+	      <div class='cart-total'>
+	      	{{ cart.total_price | money }}
+	      </div>
+	      <div class='cart-img'>
+	        {{ 'cart.png' | asset_url | img_tag:'shopping' }}
+	      </div>
+	    </div>
+			</a>
+		</td></tr></table>
 		<div class='divider'></div>
+		{% if settings.fixed_header %}</div>{% endif %}
     <div class='nav'>
       <div class='nav-head'>pages</div>
       {% for link in linklists.main-menu.links %}
@@ -78,6 +83,30 @@
       <div class='nav-item'>here</div>
     </div>
 		{{ content_for_layout }}
+		<div class='featured-divider'></div>
+		<div class="footer">
+			<div class="footer-store-name">
+				the dieter store
+			</div>
+			<div class="footer-contact">
+				512 334 7203
+			</div>
+			<div class="footer-contact">
+				email
+			</div>
+			<div class="footer-contact">
+				twitter
+			</div>
+			<div class="footer-contact">
+				facebook
+			</div>
+			<div class="footer-cards">
+				credit cards
+			</div>
+			<div class="footer-copyright">
+				copyright &copy; 2011 the dieter store.
+			</div>
+		</div>
 	</div>
 	</body>
 </html>

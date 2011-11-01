@@ -360,6 +360,10 @@ input:-moz-placeholder {
 	color:#4d4d4d;
 }
 
+.remove a:hover {
+	text-decoration: line-through;
+}
+
 .total-price {
 	text-align: right;
 }

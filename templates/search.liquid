@@ -15,14 +15,18 @@
 						{% else %}
 							<div class='product'>
 						{% endif %}
-						{% if item.compare_at_price_max > item.price %}
-							<img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+						{% if settings.sale_banner %}
+							{% if item.compare_at_price_max > item.price %}
+								<img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+							{% endif %}
 						{% endif %}
 						{% if item.available %}
 						{% else %}
-							<a href="{{ item.url | within: collections.frontpage }}">
-								<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
-							</a>
+							{% if settings.soldout_banner %}
+								<a href="{{ item.url | within: collections.frontpage }}">
+									<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+								</a>
+							{% endif %}
 						{% endif %}
 						<a href="{{ item.url | within: collections.frontpage }}">
 							<img src="{{ item.images.first | product_img_url: 'original' }}" alt="{{ item.title | escape }}" class='product-img' />
@@ -31,7 +35,11 @@
 						  <tr>
 						    <td>
 						      <div class='price'>
-						        {{ item.price | money | remove: '.00' }}
+						        {% if settings.price_decimal %}
+											{{ item.price | money }}
+										{% else %}
+						        	{{ item.price | money | remove: '.00' }}
+										{% endif %}
 						      </div>
 						    </td>
 						    <td>

@@ -1,0 +1,40 @@
+TODO:
+	featured collections
+	vendor
+	make more carousel images, reverse price and name
+	make documentation pdf
+	
+settings:
+	home:
+		logo, y/n?
+		carousel, y/n
+		carousel, upload images (must be w/h)
+		choose front page collections
+	products:
+		use .00 in price y/n
+		show price comparison y/n
+		show sale banner y/n
+		show soldout banner y/n
+		show related products y/n
+		show tag on product page?
+	color:
+		primary: #4D4D4D
+		secondar (product name & desc): #7F7E83
+		tertiary: #A6AAAD
+		nav-bg/dividers: #eeeeee
+		accent: #ED5241
+	typography:
+		font: choose
+		s/m/l
+	footer:
+		show credit cards y/n
+		which
+		show shopify y/n
+		show twitter y/n
+		show fb y/n
+		show email
+		show phone
+		show address
+	cart:
+		enable note field
+	
