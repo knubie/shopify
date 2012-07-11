@@ -1,19 +1,39 @@
-{% if tablerowloop.col_last %}<div class='product last'>{% else %}<div class='product'>{% endif %}
+<div class="product prod columns{% cycle ' alpha', '', ' omega' %}{% cycle ' bi-alpha', ' bi-omega' %}">
 	{% if settings.sale_banner %}
 		{% if product.compare_at_price_max > product.price %}
-		  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+			<a href="{{ product.url }}">
+		  	<!--[if !IE]><!-->
+					<div class="small-sale-banner">
+	    		    <div class="small-sale-left"></div><div class="small-sale-middle">on sale</div><div class="small-sale-right"></div>
+		    	</div>
+				<!--<![endif]-->
+				<!--[if IE]>
+					<div class="small-sale-banner-ie">
+	    		    <div class="small-sale-middle">on sale</div>
+		    	</div>
+				<![endif]-->
+			</a>
 		{% endif %}
 	{% endif %}
 	{% if product.available %}
 	{% else %}
 		{% if settings.soldout_banner %}
 			<a href="{{ product.url }}">
-	  		<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+				<!--[if !IE]><!-->
+		  		<div class="small-soldout-banner">
+		    	    <div class="small-soldout-left"></div><div class="small-soldout-middle">sold out</div><div class="small-soldout-right"></div>
+			    </div>
+				<!--<![endif]-->
+				<!--[if IE]>
+		  		<div class="small-soldout-banner-ie">
+		    	    <div class="small-soldout-middle">sold out</div>
+			    </div>
+				<![endif]-->
 			</a>
 		{% endif %}
 	{% endif %}
 	<a href="{{ product.url }}">
-		<img src="{{ product.images.first | product_img_url: 'original' }}" alt="{{ product.title | escape }}" class='product-img' />
+		<img src="{{ product.images.first | product_img_url: 'original' }}" alt="{{ product.title | escape }}" class="product-img prod columns" />
 	</a>
 	<table>
 	  <tr>
@@ -45,3 +65,5 @@
 		</tr>
 	</table>
 </div>
+{% cycle '', '', '<br class="clear tri-br">' %}
+{% cycle '', '<br class="clear bi-br">' %}

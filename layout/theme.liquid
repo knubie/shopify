@@ -1,112 +1,139 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>{{ shop.name }} &mdash; {{ page_title }}</title>
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
 
-		{{ 'jquery-1.6.4.min.js' | asset_url | script_tag }}
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+		<title>{{ shop.name }} &mdash; {{ page_title }}</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<!-- Mobile Specific Metas
+	  ================================================== -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<!-- CSS
+	  ================================================== -->
+		{{ 'fonts.css'  | asset_url | stylesheet_tag }}
+		{{ 'base.css'  | asset_url | stylesheet_tag }}
+		{{ 'skeleton.css'  | asset_url | stylesheet_tag }}
+		{{ 'layout.css'  | asset_url | stylesheet_tag }}
+		{{ 'styles.css'  | asset_url | stylesheet_tag }}
+		{{ 'nivo-slider.css'  | asset_url | stylesheet_tag }}
+		
+		<!-- JS
+	  ================================================== -->
+		{{ 'http://ajax.microsoft.com/ajax/jquery/jquery-1.4.4.min.js' | script_tag }}
 		{{ 'jquery.nivo.slider.pack.js' | asset_url | script_tag }}
 		{{ 'main.js' | asset_url | script_tag }}
+		{{ 'jquery.placeholder.min.js' | asset_url | script_tag }}
 		{{ 'option_selection.js' | asset_url | script_tag }}
-		{{ 'fonts.css'  | asset_url | stylesheet_tag }}
-		{{ 'styles.css'  | asset_url | stylesheet_tag }}
-		{{ 'reset.css'  | asset_url | stylesheet_tag }}
-		{{ 'nivo-slider.css'  | asset_url | stylesheet_tag }}
+		{{ 'raphael-min.js' | asset_url | script_tag }}
+		{{ 'raphael-svg-import.js' | asset_url | script_tag }}
+		{{ 'waypoints.min.js' | asset_url | script_tag }}
 		
 		{{ content_for_header }}
 
-	</head>
-	<body>
-	<div class='container'>
-		{% if settings.fixed_header %}<div class="fixed">{% endif %}
-		<div class='logo'>
+</head>
+<body>
+	<div class='container top'>
+		<div class='logo sixteen columns'>
 			{% if settings.use_logo_image == true %}
 				<a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
 			{% else %} 
 				<a href="/">{{ shop.name }}</a>
 			{% endif %}
 		</div>
-		<div class="blank">
-		</div>
-		<table><tr><td>
-		<div class='search'>
+		<div class='search-holder-two sixteen columns alpha clearfix'>
+		<div class='search-holder sixteen columns clearfix'>
+			<div class="search-pusher">&nbsp;</div>
+		<div class='search searchcol columns alpha'>
+			<div id="magnify"></div>
       <form class='search-form' action="/search" method="get">
         <input class='search-box' name="q" id="q" placeholder='what are you looking for?' type='search' />
 				<input type="hidden" name="search-button" onclick="if( this.value == 'Search...' ) {this.value = '';};" id="seek" />
       </form>
     </div>
-		</td><td>
-			<a href="/cart">
-			<div class='shopping-cart'>
-	      <div class='cart-items'>
-	      	{% if cart.item_count > 0 %}
-		      	{{ cart.item_count}} {{ cart.item_count | pluralize: 'item', 'items' }}
-		    	{% else %}
-		      	0 items
-		    	{% endif %}
-	      </div>
-	      <div class='cart-total'>
-	      	{{ cart.total_price | money }}
-	      </div>
-	      <div class='cart-img'>
-	        {{ 'cart.png' | asset_url | img_tag:'shopping' }}
-	      </div>
-	    </div>
-			</a>
-		</td></tr></table>
-		<div class='divider'></div>
-		{% if settings.fixed_header %}</div>{% endif %}
-    <div class='nav'>
-      <div class='nav-head'>pages</div>
+		<a href="/cart">
+			<div class='shopping-cart cartcol columns omega'>
+	    	<div id='cart-items'>
+	    		{% if cart.item_count > 0 %}
+		  	  	{{ cart.item_count}} {{ cart.item_count | pluralize: 'item', 'items' }}
+		  		{% else %}
+		  	  	0 items
+		  		{% endif %}
+	    	</div>
+	    	<div id='cart-total'>
+	    		{{ cart.total_price | money }}
+	    	</div>
+	    	<div id='cart-img'>
+	    	</div>
+	  	</div>
+		</a>
+		<div class='divider sixteen columns alpha' id="search-div"></div>
+		</div></div>
+		<div class='nav-holder three columns clearfix'>
+    <div class='nav three columns clearfix alpha'>
+      <div class='nav-head three columns alpha'>pages</div>
       {% for link in linklists.main-menu.links %}
 				{% if link.active %}
-					<div class="nav-item-active">{{ link.title | downcase }}</div>
+					<div class="nav-item-active three columns{% cycle ' navalpha', ' navomega' %}">{{ link.title | downcase }}</div>
 				{% else %}
-					<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+					<a href="{{ link.url }}"><div class="nav-item three columns{% cycle ' navalpha', ' navomega' %}">{{ link.title | downcase }}</div></a>
 				{% endif %}
 			{% endfor %}
-      <div class='nav-divider'></div>
-      <div class='nav-head'>categories</div>
+      <div class='divider three columns alpha'></div>
+      <div class='nav-head four columns alpha'>categories</div>
 			{% for link in linklists.categories.links %}
 				{% if link.active %}
-					<div class="nav-item-active">{{ link.title | downcase }}</div>
+					<div class="nav-item-active three columns{% cycle ' navalpha', ' navomega' %}">{{ link.title | downcase }}</div>
 				{% else %}
-					<a href="{{ link.url }}"><div class="nav-item">{{ link.title | downcase }}</div></a>
+					<a href="{{ link.url }}"><div class="nav-item three columns{% cycle ' navalpha', ' navomega' %}">{{ link.title | downcase }}</div></a>
 				{% endif %}
 			{% endfor %}
-      <div class='nav-divider'></div>
-      <div class='nav-head'>tags</div>
-      <div class='nav-item'>some</div>
-      <div class='nav-item'>tags</div>
-      <div class='nav-item'>could</div>
-      <div class='nav-item'>go</div>
-      <div class='nav-item'>here</div>
-    </div>
+			<div class='divider three columns alpha'></div>
+    </div>&nbsp;
+		</div>
 		{{ content_for_layout }}
-		<div class='featured-divider'></div>
-		<div class="footer">
-			<div class="footer-store-name">
-				the dieter store
-			</div>
-			<div class="footer-contact">
-				512 334 7203
-			</div>
-			<div class="footer-contact">
-				email
-			</div>
-			<div class="footer-contact">
-				twitter
-			</div>
-			<div class="footer-contact">
-				facebook
-			</div>
-			<div class="footer-cards">
-				credit cards
-			</div>
-			<div class="footer-copyright">
-				copyright &copy; 2011 the dieter store.
+		<div class="push"></div>
+	</div>
+		<div class="container">
+			<div class="footer sixteen columns">
+				<div class='divider'></div>
+				<div class="footer-store-name">
+					the dieter store
+				</div>
+				<div class="footer-contact">
+					512 334 7203
+				</div>
+				<div class="footer-contact">
+					email
+				</div>
+				<div class="footer-contact">
+					twitter
+				</div>
+				<div class="footer-contact">
+					facebook
+				</div>
+				<div class="footer-cards">
+					{% if settings.show_visa %}<img src="{{ 'visa.png' | asset_url }}" alt="visa" />{% endif %}
+					{% if settings.show_mastercard %}<img src="{{ 'master_card.png' | asset_url }}" alt="visa" />{% endif %}
+					{% if settings.show_amex %}<img src="{{ 'amex.png' | asset_url }}" alt="visa" />{% endif %}
+					{% if settings.show_paypal %}<img src="{{ 'paypal.png' | asset_url }}" alt="visa" />{% endif %}
+				</div>
+				<div class="footer-copyright">
+					copyright &copy; 2011 the dieter store. {{ powered_by_link }}
+					<br/><br/>{% if settings.tankjet %} Designed and developed by <a href="http://tankjetstudios.com/" target="_blank">Tank Jet Studios</a>{% endif %}
+					<br/><br/>
+				</div>
 			</div>
 		</div>
-	</div>
-	</body>
+</body>
 </html>

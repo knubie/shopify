@@ -1,27 +1,22 @@
-<div class='products-section'>
+<div class="thirteen columns clearfix">
   <div class='carousel'>
     <img src="{{ 'carousel1.png' | asset_url }}" alt="" />
 		<img src="{{ 'carousel2.png' | asset_url }}" alt="" />
   </div>
 
 	{% if settings.home_featured %}
-	  <div class='featured'>featured products</div>
-	  <div class='featured-divider'></div>
-		<table>
-			{% tablerow product in collections[settings.home_featured_collection].products cols: 3 %}
+	  <div class='heading thirteen columns alpha'>featured products</div>
+	  <div class='divider thirteen columns alpha'></div>
+			{% for product in collections[settings.home_featured_collection].products %}
 				{% include 'product_loop' %}
-			{% endtablerow %}
-		</table>
+			{% endfor %}
 	{% endif %}
 	
 	{% if settings.home_newest %}
-	  <div class='featured'>newest products</div>
-	  <div class='featured-divider'></div>
-		<table>
-			{% tablerow product in collections[settings.home_newest_collection].products cols: 3 %}
+	  <div class='heading thirteen columns alpha'>newest products</div>
+	  <div class='divider thirteen columns alpha'></div>
+			{% for product in collections[settings.home_newest_collection].products %}
 				{% include 'product_loop' %}
-			{% endtablerow %}
-		</table>
+			{% endfor %}
 	{% endif %}
-	
 </div>

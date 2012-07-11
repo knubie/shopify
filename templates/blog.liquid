@@ -1,53 +1,52 @@
-<!--begin left-column--> 
-<div id="left-column">
-		
-	{% paginate blog.articles by 5 %}
-		{% for article in blog.articles %}
-		<a name="article-{{ article.id }}"></a>
+<div class='thirteen columns clearfix'>
 
-		<div class="article {% if forloop.first %}first{% endif %}">
-    	<div class="blog-post">
-				<div>
-      	<p class="user"></p>
-  			<h2 class="blog-post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
-      	<h3 class="blog-post-date"><p>by {{ article.author }} on {{ article.created_at | date: "%B %d, %Y" }} {% if blog.comments_enabled? %}<a class="comments" href="{{article.url}}#comments">Comments ({{ article.comments_count }})</a>{% endif %}</p></h3>
-				<div class="textile">
-  		  	{{ article.content }}
+	<div class="seven columns offset-by-one alpha post">
+			
+		{% paginate blog.articles by 5 %}
+			{% for article in blog.articles %}
+			<a name="article-{{ article.id }}"></a>
+	
+			<div class="article {% if forloop.first %}first{% endif %}">
+	    	<div class="blog-post">
+					<p class="user"></p>
+					<a href="{{ article.url }}" class="blog-post-title">{{ article.title }}</a>
+					<div class="blog-post-date">by <span class="author">{{ article.author }}</span> on {{ article.created_at | date: "%B %d, %Y" }} {% if blog.comments_enabled? %}<a class="comments" href="{{article.url}}#comments">Comments ({{ article.comments_count }})</a>{% endif %}</div>
+					<div class="divider alpha"></div>
+					<div class="textile">
+						{{ article.content }}
+					</div>
+				</div>
+	    
+  			<div class="blog-details">
+					<a href="{{ article.url }}">continue reading</a>
   			</div>
-    	</div>
-    
-  		<div class="blog-details">
-      		<ul>
-						<li class="continue"><a href="{{ article.url }}">Continue Reading</a></li>
-					</ul>
-  		</div>
-			<div style="clear: both"></div>
+				<div class="divider alpha"></div>
 			</div>
-			</div>
-
-			{% endfor %}
+			
 	
-			{% if paginate.pages > 1 %}
-			<div class="pagination">
-					{{ paginate | default_pagination }}
+				{% endfor %}
+		
+				{% if paginate.pages > 1 %}
+				<div class="pagination">
+						{{ paginate | default_pagination }}
+				</div>
+				{% endif %}
+	
+		{% endpaginate %}
+	
+	</div>
+	
+	<div class="four columns offset-by-one omega">
+		
+		<div class="recent-posts">recent posts<a class="rss-icon" href="{{ blog.url }}.atom"><div id="rss"></div></a></div>
+		<div class="divider alpha"></div>
+		{% for article in blog.articles limit:7 %}
+			<div class="recent-post-list">
+				<div class="recent-title"><a href="{{ article.url }}">{{ article.title }}</a></div>
+				<div class="recent-date">{{ article.created_at | date: "%B %d, %Y" }}</div>
 			</div>
-			{% endif %}
-
-	{% endpaginate %}
+		{% endfor %}
+		
+	</div>
 
 </div>
-<!--end left-column-->
-
-<!--begin right-column--> 
-<div id="right-column">
-	
-	<h2 class="right-column-heading"><a class="rss-icon" href="{{ blog.url }}.atom"><img src="{{ 'icon-rss.png' | asset_url }}" width="16" height="16" alt="RSS Feed"></a>Recent Posts</h2>
-	
-	{% for article in blog.articles limit:7 %}
-	<ul>
-		<li><a href="{{ article.url }}">{{ article.title }}</a></li>
-	</ul>
-	{% endfor %}
-	
-</div>
-<!--end right-column-->

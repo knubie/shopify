@@ -15,10 +15,10 @@
 {% endif %}
 
 {% if collection %}
-	<div class='featured related'>
+	<div class='heading thirteen columns alpha'>
 		{{ heading }}
 	</div>
-	<div class='featured-divider'></div>
+	<div class='divider thirteen columns alpha'></div>
 	{% assign current_product_found = false %}
 	{% assign index = 0 %}
 	{% for prod in collection.products limit: number_of_related_products_to_fetch %}
@@ -27,37 +27,50 @@
 		{% else %}
 			{% capture index %}{{ index | plus: 1 }}{% endcapture %}
 	  	{% unless current_product_found == false and forloop.last %}
-			{% if index == '3' %}
-				<div class='product last'>
-			{% else %}
-				<div class='product'>
-			{% endif %}
-			{% if prod.compare_at_price_max > prod.price %}
-			  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
-			{% endif %}
-			{% if prod.available %}
-			{% else %}
+				{% case index %}
+						{% when '3' %}
+							<div class='product prod columns omega related-last'>
+						{% when '2' %}
+							<div class='product prod columns related-middle'>
+						{% when '1' %}
+							<div class='product prod columns alpha'>
+				{% endcase %}
+				{% if settings.sale_banner %}
+					{% if prod.compare_at_price_max > prod.price %}
+					  <a href="{{ prod.url }}">
+					  	<div class="small-sale-banner">
+			    		    <div class="small-sale-left"></div><div class="small-sale-middle">on sale</div><div class="small-sale-right"></div>
+				    	</div>
+						</a>
+					{% endif %}
+				{% endif %}
+				{% if prod.available %}
+				{% else %}
+					{% if settings.soldout_banner %}
+						<a href="{{ prod.url }}">
+				  		<div class="small-soldout-banner">
+				    	    <div class="small-soldout-left"></div><div class="small-soldout-middle">sold out</div><div class="small-soldout-right"></div>
+					    </div>
+						</a>
+					{% endif %}
+				{% endif %}
 				<a href="{{ prod.url | within: collection }}">
-					<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+					<img src="{{ prod.featured_image | product_img_url: 'original' }}" alt="{{ link.title | escape }}" class='product-img product prod columns ' />
 				</a>
-			{% endif %}
-			<a href="{{ prod.url | within: collection }}">
-				<img src="{{ prod.featured_image | product_img_url: 'original' }}" alt="{{ link.title | escape }}" class='product-img' />
-			</a>
-			<table>
-				<tr>
-					<td>
-						<div class='price'>
-							{{ prod.price | money | remove: '.00' }}
-						</div>
-					</td>
-					<td>
-						<div class='desc'>
-							<a href="{{ prod.url }}">{{ prod.title }}{{ index }}</a>
-						</div>
-					</td>
-				</tr>
-			</table>
+				<table>
+					<tr>
+						<td>
+							<div class='price'>
+								{{ prod.price | money | remove: '.00' }}
+							</div>
+						</td>
+						<td>
+							<div class='desc'>
+								<a href="{{ prod.url }}">{{ prod.title }}{{ index }}</a>
+							</div>
+						</td>
+					</tr>
+				</table>
 			{% endunless %}
 		</div>
 		{% endif %}

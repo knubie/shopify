@@ -1,42 +1,37 @@
-<div class='products-section'>
-	<div class='featured'>
+<div class='thirteen columns clearfix'>
+	<div class='heading'>
     you have {{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %} in your cart
   </div>
 	{% if cart.item_count > 0 %}
-  <div class='featured-divider'></div>
+  <div class='divider thirteen columns alpha'></div>
 		<form action="/cart" method="post" name="cartform">
 			{% for item in cart.items %}
-				<table>
-					<tr><td>
-						<img alt='' class='cart-thumb' src="{{ item.product.images[0] | product_img_url: 'small' }}" alt="{{ item.title | escape }}" />
-					</td><td class="cart-col">
-						<div id="cart-desc" class='desc'>
-							{{ item.title | escape }}
-						</div>
-						<div class='price'>
-						  {{ item.price | money | remove: '.00' }}
-						</div>
-					</td><td class="cart-col">
-						<div class="adjust-qty">
-							<img src="{{ 'x.png' | asset_url }}" alt="" />
-							<input type="text" class="field" name="updates[{{ item.id }}]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
-						</div>
-					</td><td class="cart-col">
-						<div class="col-three">
-							<div class='price' id="cart-price">
-							  {{ item.line_price | money }}
-							</div>
-							<div class="remove">
-								<a href="/cart/change/{{ item.variant.id }}?quantity=0">remove</a>
-							</div>
-						</div>
-					</td></tr>
-				</table>
-				<div class='featured-divider'></div>
+				<img alt='' class='thumb two columns alpha' src="{{ item.product.images[0] | product_img_url: 'small' }}" alt="{{ item.title | escape }}" />
+				<div class="six columns cart-col">
+					<div class='cart-desc'>
+						{{ item.title | escape }}
+					</div>
+					<div class='cart-price price-before'>
+					  {{ item.price | money }}
+					</div>
+				</div>
+				<div class="two columns cart-col adjust-qty">
+					<img src="{{ 'x.png' | asset_url }}" alt="" />
+					<input type="text" class="field" name="updates[{{ item.id }}]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+				</div>
+				<div class="three columns omega cart-last-col cart-col">
+					<div class='cart-price price-after'>
+					  {{ item.line_price | money }}
+					</div>
+					<div class="remove">
+						<a href="/cart/change/{{ item.variant.id }}?quantity=0">remove</a>
+					</div>
+				</div>
+			<div class='divider thirteen columns alpha'></div>
 			{% endfor %}
 	
 	
-	<div class="total-price">
+	<div class="thirteen columns alpha total-price">
 		<div class="total">
 			total
 		</div>
@@ -44,8 +39,8 @@
 		  {{ cart.total_price | money }}
 		</div>
 	</div>
-	<div class='featured-divider'></div>
-	<div class="total-price">
+	<div class='divider thirteen columns alpha'></div>
+	<div class="thirteen columns alpha total-price">
 		<input type="submit" class="large button main" alt="Checkout" name="checkout" value="Checkout" id="checkout-button" />
 		<input type="submit" class="large button secondary" alt="Update" name="update" class="update" id="update-button" value="Update" />
 		<div class="update-cart">

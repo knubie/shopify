@@ -26,6 +26,30 @@
 	    </tr>    
 	  </table>
 	</fieldset>
+	
+	<fieldset>
+	<legend>Background</legend>
+	  <table>
+	    <tr>
+	      <td><label for="use_bg_image">Use a custom background image?</label></td>
+	      <td><input type="checkbox" id="use_bg_image" name="use_bg_image" data-max-height="500" data-max-width="500" value="0"/></td>
+	    </tr>
+	    <tr>
+	      <td><label for="bg_image">Site logo</label></td>
+	      <td>
+	        <select name="bg_image" id="bg_image">
+	          <option value="bg.png" selected='selected'>bg.png</option>
+	        </select>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td><label for="bg_image_upload">Upload a new background image</label></td>
+	      <td>
+	        <input type="file" id="bg_image_upload" name="bg.png" data-max-width="500" data-max-height="500" />
+	      </td>
+	    </tr>    
+	  </table>
+	</fieldset>
 
 	<fieldset>
 	<legend>Fixed Elements</legend>
@@ -60,12 +84,6 @@
 			<td><label for="home_newest_collection">Which collection shows your newest products?</label></td>
 			<td><select id="home_newest_collection" class="collection" name="home_newest_collection" value="None" /></td>
     </tr>
-		<tr>
-		<td><label for="home_banner_img">TODO: upload images for carousel.</label></td>
-		<td>
-		  <input type="file" id="home_banner_img" name="home-banner-img.png"  data-max-width="360" data-max-height="360" />
-		</td>
-		</tr>
 		
   </table>
 </fieldset>
@@ -120,7 +138,7 @@
     </tr>
 		<tr>
       <td><label for="quaternary_color">Quaternary (Search placeholder, old price)</label></td>
-      <td><input id="quaternary_color" name="quaternary_color" class="color" value="#D0D6DB" /></td>
+      <td><input id="quaternary_color" name="quaternary_color" class="color" value="#cdcbcb" /></td>
     </tr>
 		<tr>
       <td><label for="quinary_color">Quinary (Nav BG, Dividers)</label></td>
@@ -200,8 +218,8 @@
 		  <td><input type="text" id="facebook_name" name="facebook_name" class="text" value=""/></td>
 		</tr>
     <tr>
-      <td><label for="include_shopifylink">Show "built with Shopify?" </label></td>
-      <td><input type="checkbox" id="include_shopifylink" name="include_shopifylink" value="1" checked="checked"/></td>
+      <td><label for="tankjet">Show "Designed by Tank Jet Studios?" </label></td>
+      <td><input type="checkbox" id="tankjet" name="tankjet" value="1" checked="checked"/></td>
     </tr>
   </table>
 </fieldset>

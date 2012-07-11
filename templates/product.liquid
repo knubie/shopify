@@ -1,21 +1,32 @@
-<div class='products-section'>
-	<div class="pd-imgs">
+<div class='thirteen columns clearfix'>
+	<div class="seven columns alpha pd-imgs">
 		{% if settings.sale_banner %}
 			{% if product.compare_at_price_max > product.price %}
-				<img alt='' class='onsale' src="{{ 'onsale.png' | asset_url }}" />
+				<!--[if !IE]><!-->
+					<div class="small-sale-banner">
+	    		    <div class="small-sale-left"></div><div class="small-sale-middle">on sale</div><div class="small-sale-right"></div>
+		    	</div>
+				<!--<![endif]-->
+				<!--[if IE]><!-->
+					<div class="small-sale-banner-ie">
+	    		    <div class="small-sale-middle">on sale</div>
+		    	</div>
+				<!--<![endif]-->
 			{% endif %}
 		{% endif %}
-		<img src="{{ product.images.first | product_img_url: 'original' }}" id="big-img" alt=""/>
+		<img src="{{ product.images.first | product_img_url: 'original' }}" class="seven columns" id="big-img" alt=""/>
 		<br/>
-		{% for image in product.images %}
-			{% if forloop.last %}
-				<a href="javascript:void(0)"><img src="{{ image | product_img_url: 'original' }}" class="thumb last" alt=""/></a>
-			{% else %}
-				<a href="javascript:void(0)"><img src="{{ image | product_img_url: 'original' }}" class="thumb" alt=""/></a>
-			{% endif %}
-		{% endfor %}
+		{%  if product.images.size > 1  %}
+			{% for image in product.images %}
+				{% if forloop.last %}
+					<a href="javascript:void(0)"><img src="{{ image | product_img_url: 'original' }}" class="thumb last" alt=""/></a>
+				{% else %}
+					<a href="javascript:void(0)"><img src="{{ image | product_img_url: 'original' }}" class="thumb" alt=""/></a>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
 	</div>
-	<div class="pd-text">
+	<div class="six columns omega pd-text">
 		<div class="pd-name">
 			{{ product.title | escape }}
 		</div>
@@ -70,15 +81,16 @@
 				This product is out of stock.
 			</div>
 		{% endif %}
-		<div class='blank'></div>
+		<br class='clear' />
 		<div class="divider">
 		</div>
 		<div class="pd-desc">
 			{{ product.description }}
 		</div>
 	</div>
+	<div class="pd-spacer thirteen columns"></div>
 	{% if settings.related_products %}
-	{% include 'related_products' %}
+		{% include 'related_products' %}
 	{% endif %}
 </div>
 

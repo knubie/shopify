@@ -1,56 +1,64 @@
-<div class='products-section'>
+<div class="twelve columns">
 	{% if search.performed %}
 		{% paginate search.results by 21 %}
-	  <div class='featured'>
+	  <div class='heading twelve columns alpha'>
 			{% if search.results == empty %}
 				no results for <span class="search-terms">{{ search.terms | escape }}</span>
 			{% else %}
 				showing results for <span class="search-terms">{{ search.terms | escape }}</span>
 	  		</div>
-	  		<div class='featured-divider'></div>
-				<table>
-					{% tablerow item in search.results cols: 3 %}
-						{% if tablerowloop.col_last %}
-							<div class='product last'>
-						{% else %}
-							<div class='product'>
-						{% endif %}
-						{% if settings.sale_banner %}
-							{% if item.compare_at_price_max > item.price %}
-								<img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+	  		<div class='divider twelve columns alpha'></div>
+					{% for item in search.results %}
+						<div class="product prod columns{% cycle ' alpha', '', ' omega' %}{% cycle ' bi-alpha', ' bi-omega' %}">
+							{% if settings.sales_banner %}
+								{% if item.compare_at_price_max > item.price %}
+								  <img alt='' class='sale' src="{{ 'sale.png' | asset_url }}" />
+								{% endif %}
 							{% endif %}
-						{% endif %}
-						{% if item.available %}
-						{% else %}
-							{% if settings.soldout_banner %}
-								<a href="{{ item.url | within: collections.frontpage }}">
-									<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
-								</a>
+							{% if item.available %}
+							{% else %}
+								{% if settings.soldouts_banner %}
+									<a href="{{ item.url }}">
+							  		<img alt='' class='soldout' src="{{ 'soldout.png' | asset_url }}" />
+									</a>
+								{% endif %}
 							{% endif %}
-						{% endif %}
-						<a href="{{ item.url | within: collections.frontpage }}">
-							<img src="{{ item.images.first | product_img_url: 'original' }}" alt="{{ item.title | escape }}" class='product-img' />
-						</a>
-						<table>
-						  <tr>
-						    <td>
-						      <div class='price'>
-						        {% if settings.price_decimal %}
-											{{ item.price | money }}
-										{% else %}
-						        	{{ item.price | money | remove: '.00' }}
-										{% endif %}
-						      </div>
-						    </td>
-						    <td>
-						      <div class='desc'>
-						        <a href="{{ item.url | within: collections.frontpage }}">{{ item.title }}</a>
-						      </div>
-						    </td>
-						  </tr>
-						</table>
-					{% endtablerow %}
-				</table>
+							<a href="{{ item.url }}">
+								<img src="{{ item.images.first | product_img_url: 'original' }}" alt="{{ item.title | escape }}" class="product-img prod columns" />
+							</a>
+							<table>
+							  <tr>
+							    <td>
+							      <div class='price'>
+											{% if settings.price_comparison == true %}
+												{% if item.compare_at_price_max > item.price %}
+													<span class="old-price">
+														{% if settings.price_decimal %}
+															{{ item.compare_at_price_max | money }}<br/>
+														{% else %}
+										        	{{ item.compare_at_price_max | money | remove: '.00' }}<br/>
+														{% endif %}
+													</span>
+												{% endif %}
+											{% endif %}
+											{% if settings.price_decimal %}
+												{{ item.price | money }}
+											{% else %}
+							        	{{ item.price | money | remove: '.00' }}
+											{% endif %}
+							      </div>
+							    </td>
+									<td>
+										<div class='desc'>
+											<a href="{{ item.url }}">{{ item.title }}</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						{% cycle '', '', '<br class="clear tri-br">' %}
+						{% cycle '', '<br class="clear bi-br">' %}
+					{% endfor %}
 				{% if paginate.pages > 1 %}
 		    	<div class="pagination">
 		    		{{ paginate | default_pagination }}

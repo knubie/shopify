@@ -1,13 +1,11 @@
-<div class='products-section'>
+<div class='thirteen columns clearfix'>
 {% paginate collection.products by 21 %}
 	{% if collection.products.size == 0 %}
 		Sorry, there are no products in this collection.
 	{% else %}		
-		<table>
-		{% tablerow product in collection.products cols: 3 %}
+		{% for product in collection.products %}
 			{% include 'product_loop' %}
-		{% endtablerow %}
-		<table>
+		{% endfor %}
 		{% if paginate.pages > 1 %}
 		<div id="pagination">
 			<ul>
